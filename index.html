@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lamm — small tools by OMK</title>
+<style>:root{
+  --paper:#F7F8F6; --surface:#FFFFFF; --rule:#E2E5E0;
+  --ink:#17211D; --soft:#5A655F; --emerald:#0A5C48; --gold:#C9A962;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#10120F;--surface:#1A1D1A;--rule:#2E332E;
+        --ink:#E8EBE7;--soft:#9EA8A2;--emerald:#3FA789;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-size:17px;line-height:1.75;
+  font-family:"IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:56px 22px 90px}
+a{color:var(--emerald)}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:40px}
+.brand .name{font-size:22px;font-weight:600;letter-spacing:.01em}
+h1{font-size:clamp(28px,5vw,38px);line-height:1.2;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-size:20px;margin:36px 0 10px}
+.updated{color:var(--soft);font-size:14.5px;margin:0 0 28px}
+p,li{color:var(--ink)}
+.soft{color:var(--soft)}
+code{font-family:ui-monospace,Menlo,monospace;font-size:14.5px;background:var(--surface);
+  border:1px solid var(--rule);border-radius:6px;padding:1px 6px;direction:ltr;unicode-bidi:isolate}
+hr{border:0;border-top:1px solid var(--rule);margin:52px 0}
+footer{color:var(--soft);font-size:14px;margin-top:52px;padding-top:20px;border-top:1px solid var(--rule)}
+[dir=rtl]{text-align:right}
+
+.hero{display:flex;align-items:center;gap:16px;margin:6px 0 4px}
+.tag{color:var(--soft);font-size:18px;margin:0 0 40px}
+.apps{display:grid;gap:14px}
+.app{display:block;text-decoration:none;color:inherit;background:var(--surface);
+  border:1px solid var(--rule);border-radius:16px;padding:20px 22px}
+.app h2{margin:0 0 4px;font-size:19px}
+.app p{margin:0;color:var(--soft);font-size:15.5px}
+.soon{color:var(--soft);font-size:14.5px;margin-top:26px}
+</style>
+<div class="wrap">
+  <div class="hero"><svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 52 52">
+  <defs><clipPath id="m"><rect x="0" y="0" width="34" height="34" rx="10"/></clipPath></defs>
+  <rect x="0" y="0" width="34" height="34" rx="10" fill="#0A5C48"/>
+  <rect x="18" y="18" width="34" height="34" rx="10" fill="#0A5C48"/>
+  <g clip-path="url(#m)"><rect x="18" y="18" width="34" height="34" rx="10" fill="#C9A962"/></g>
+</svg><h1 style="margin:0">Lamm</h1></div>
+  <p class="tag">Less clutter. More space.</p>
+
+  <div class="apps">
+    <a class="app" href="photocleaner/">
+      <h2>Photo Cleaner</h2>
+      <p>Finds duplicates, screenshots and oversized videos, and shows what each
+         one costs you. Android.</p>
+    </a>
+  </div>
+
+  <p class="soon">A small family of tools by OMK. More to come.</p>
+  <footer>
+    <a href="photocleaner/privacy.html">Photo Cleaner — Privacy Policy</a>
+  </footer>
+</div>
