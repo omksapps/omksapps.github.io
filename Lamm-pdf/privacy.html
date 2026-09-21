@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Privacy Policy — Photo Cleaner by Lamm</title>
+<title>Privacy Policy — Lamm PDF</title>
 <style>:root{
   --paper:#F7F8F6; --surface:#FFFFFF; --rule:#E2E5E0;
   --ink:#17211D; --soft:#5A655F; --emerald:#0A5C48; --gold:#C9A962;
@@ -37,74 +37,97 @@ footer{color:var(--soft);font-size:14px;margin-top:52px;padding-top:20px;border-
   <g clip-path="url(#m)"><rect x="18" y="18" width="34" height="34" rx="10" fill="#C9A962"/></g>
 </svg><span class="name">Lamm</span></div>
   <h1>Privacy Policy</h1>
-  <p class="updated">Photo Cleaner · published by OMK under the brand Lamm · last updated 13 September 2026</p>
-  <p>Photo Cleaner is published by OMK under the brand Lamm.</p>
+  <p class="updated">Lamm PDF · published by OMK under the brand Lamm · last updated 21 September 2026</p>
+  <p>Lamm PDF is published by OMK under the brand Lamm.</p>
+
 <h2>The short version</h2>
-<p>Your photographs never leave your phone. They are read, compared and deleted on the device. There is no account, no server of ours, and no picture is ever uploaded, copied out or backed up anywhere.</p>
-<p>The app does use the internet, for exactly two things: showing one banner advertisement, and checking whether you have an active subscription. Neither of those involves your photographs.</p>
-<h2>What the app accesses on your device, and why</h2>
-<p>To find clutter the app needs to look at your gallery. It reads:</p>
-<ul>
-<li>the <strong>metadata</strong> of your photos and videos — file size, date, dimensions, folder and file name — to identify screenshots, oversized videos and files old enough to be worth reviewing;</li>
-<li>the <strong>contents</strong> of some files, to prove that two are identical or nearly so. This happens entirely in the phone's memory, and what is kept afterwards is a short fingerprint, stored in the app's own cache directory on your device;</li>
-<li>optionally, a <strong>folder you grant access to</strong> — used only to find copies WhatsApp made of pictures already in your gallery, and its own status cache. You grant it explicitly and can revoke it in Android settings at any time.</li>
-</ul>
-<p>None of this is transmitted anywhere.</p>
-<h2>Advertising</h2>
-<p>The app shows a single banner advertisement on its home screen, served by <strong>Google AdMob</strong>. To do that, AdMob receives information from your device — including your device's <strong>advertising ID</strong>, device and app information, and approximate location derived from your IP address — and may use it to select and measure ads. It does <strong>not</strong> receive your photographs, your gallery contents, or anything the app has found in them.</p>
-<p>Google's handling of that data is described at <a href="https://policies.google.com/technologies/partner-sites">https://policies.google.com/technologies/partner-sites</a>.</p>
-<p><strong>Your choices.</strong> You can reset or delete your advertising ID in <em>Android Settings → Privacy → Ads</em>. If you are in the European Economic Area, the United Kingdom or Switzerland, the app shows Google's consent form the first time it runs and respects your answer; you can change it later from the same screen. Subscribing removes the banner, and with it the ad requests.</p>
+<p>Your documents never leave your phone. Scanning, editing, signing, merging, splitting, compressing, converting, text recognition, password protection and redaction all run on the device itself. There is no account, no server of ours, and no document is ever uploaded, copied out or backed up anywhere.</p>
+<p>The app does use the internet, for a small number of things that have nothing to do with the contents of your files: checking whether you have an active subscription, anonymous usage statistics, crash reports, a remote settings check, and — only if you ask for it — downloading a text-recognition language pack.</p>
+
+<h2>Your documents</h2>
+<p>Every file you scan, import, open or create lives in the app's own private storage on your device, together with its version history, your saved signatures and any text extracted by OCR. None of it is transmitted anywhere, and we have no way to see it.</p>
+<p>The app never uploads a document to be processed. Compression, conversion and text recognition are done by code running on your phone, not by a service.</p>
+
+<h2>Scanning</h2>
+<p>When you scan a page, the camera capture is handled on the device — by Google Play services' document scanner on Android, and by Apple's VisionKit on iOS. The app receives only the resulting images, and they are stored in its private storage like any other file. The app does not ask for access to your photo library.</p>
+
+<h2>Text recognition (OCR)</h2>
+<p>Text recognition runs entirely on your device. Latin scripts are read by a recognition model bundled inside the app, so that works with no network at all. For Arabic and some other languages the app needs a language pack, which it downloads — <strong>only when you choose that language</strong> — from the public Tesseract model repository at <a href="https://github.com/tesseract-ocr/tessdata_fast">github.com/tesseract-ocr/tessdata_fast</a>. That is a plain download of a model file. Nothing about your document is sent with it.</p>
+
 <h2>Subscription</h2>
-<p>The subscription is sold and managed by <strong>Google Play Billing</strong>. Google processes the payment; the app never sees your card details. The app asks Play whether your account owns an active subscription and stores only a yes/no answer on the device. You can manage or cancel at any time in Google Play.</p>
-<h2>What the app does not do</h2>
-<p>No analytics. No crash reporting. No user profiles. No sale of data. No tracking across other apps or websites. The app has no backend of its own at all.</p>
+<p>Pro is sold through <strong>Google Play Billing</strong> or the <strong>Apple App Store</strong>, and the subscription state is managed for us by <strong>RevenueCat</strong>. The store processes the payment; the app never sees your card details. RevenueCat identifies your purchase with an anonymous identifier that it generates — we do not send it your name, your email or any account of ours, because there is no account. What comes back is essentially whether Pro is active. You can manage or cancel at any time in Google Play or in your Apple ID settings.</p>
+
+<h2>Usage statistics and crash reports</h2>
+<p>The app sends anonymous product analytics through <strong>Firebase Analytics</strong> and crash diagnostics through <strong>Firebase Crashlytics</strong>. This is deliberately coarse, and the rule in our own codebase is absolute: <strong>never a file name, a file path, a password, document text, or an exact size</strong>.</p>
+<p>What an event can contain is a bucket — that a compression finished and saved "60–80%", that a file was "5–20MB", that a document had "6–20" pages — along with which tool was used and whether it succeeded. Alongside those we record a few coarse properties: whether you are on Pro, which plan, the interface language, the numeral style, and the week you installed.</p>
+<p>Crash reports contain a stack trace, the device model and the operating-system version. They exist so a bug that hits you can be found and fixed.</p>
+<p>The app also reads a small <strong>remote configuration</strong> through Firebase, which is how a minimum-supported-version notice can be delivered. That is a read; nothing about you is sent to fetch it.</p>
+
+<h2>No advertising, no tracking</h2>
+<p>There are no advertisements in Lamm PDF, and no advertising SDK. The app does not use an advertising ID: on Android the <code>com.google.android.gms.permission.AD_ID</code> permission is explicitly removed from the manifest, so it cannot be collected even if a dependency tries to add it, and on iOS there is no IDFA use and therefore no App Tracking Transparency prompt. Nothing the app collects is used to track you across other apps or websites, and nothing is sold.</p>
+
 <h2>Permissions</h2>
-<p><code>READ_MEDIA_IMAGES</code>, <code>READ_MEDIA_VIDEO</code>, and on Android 14 and later <code>READ_MEDIA_VISUAL_USER_SELECTED</code> for partial access. <code>WAKE_LOCK</code> for video playback. <code>INTERNET</code> and <code>ACCESS_NETWORK_STATE</code> for the advertisement and the subscription check. It deliberately does <strong>not</strong> request <code>MANAGE_EXTERNAL_STORAGE</code>.</p>
-<h2>Deletion</h2>
-<p>When you confirm a deletion, the app asks Android to delete those files. Android shows its own confirmation, and the app reports only what Android actually removed. On Android this deletion is permanent — the files do not go to a recycle bin — which is why the app asks twice, and why duplicate sets always keep one copy.</p>
+<p><strong>Android.</strong> <code>INTERNET</code> for the subscription check, analytics and crash reports. <code>USE_BIOMETRIC</code> for the app lock. The camera is declared as an optional feature and is used only for the fallback capture on devices without the Play services scanner. The app deliberately does <strong>not</strong> request <code>READ_MEDIA_IMAGES</code>, <code>READ_EXTERNAL_STORAGE</code>, <code>MANAGE_EXTERNAL_STORAGE</code>, contacts, location or notifications.</p>
+<p><strong>iOS.</strong> Camera, to scan documents. Add-only photo library access, used only when you ask to save exported images to Photos — the app cannot read your library. Face ID, to unlock the app and your signatures.</p>
+
+<h2>Security</h2>
+<p>Saved document passwords and your signatures are encrypted, with the keys held in the iOS Keychain or the Android Keystore and never leaving the device. With the app lock enabled, the app's snapshot in the task switcher is blurred. Temporary working folders are wiped when a job finishes and again when the app starts. Your originals are never modified in place: edits are written to a new file, and the previous version is kept in the on-device history so you can go back.</p>
+
 <h2>Children</h2>
 <p>The app is not directed at children under 13.</p>
+
+<h2>Your data and deletion</h2>
+<p>There is no account to delete, and we hold no library of yours. Deleting the app removes your documents, versions, signatures and settings from the device. If you would like the anonymous purchase, analytics or crash records associated with your installation removed, write to the address below and we will ask our providers to delete them.</p>
+
 <h2>Changes</h2>
 <p>If this policy changes, the date at the top changes with it.</p>
+
 <h2>Contact</h2>
 <p><strong>omksapps@gmail.com</strong></p>
+
   <hr>
   <div dir="rtl" lang="ar">
     <h1>سياسة الخصوصية</h1>
-    <p class="updated">منظّف الصور · تنشره OMK تحت براند Lamm · آخر تحديث ١٣ سبتمبر ٢٠٢٦</p>
-    
+    <p class="updated">Lamm PDF · تنشره OMK تحت براند Lamm · آخر تحديث ٢١ سبتمبر ٢٠٢٦</p>
+
 <h2>النسخة القصيرة</h2>
-<p>صورك لا تغادر هاتفك. تُقرأ وتُقارَن وتُحذف على الجهاز. لا حساب، ولا خادم لنا، ولا تُرفع صورة ولا تُنسخ خارجاً ولا تُحفظ احتياطياً في أي مكان.</p>
-<p>يستعمل التطبيق الإنترنت لأمرين اثنين فقط: عرض إعلان بانر واحد، والتحقق من اشتراكك. ولا واحد منهما يتعامل مع صورك.</p>
+<p>مستنداتك لا تغادر هاتفك. المسح الضوئي والتعديل والتوقيع والدمج والتقسيم والضغط والتحويل واستخراج النص والحماية بكلمة مرور وحجب المعلومات، كلّها تعمل على الجهاز نفسه. لا حساب، ولا خادم لنا، ولا يُرفع مستند ولا يُنسخ خارجاً ولا يُحفظ احتياطياً في أي مكان.</p>
+<p>يستعمل التطبيق الإنترنت لأمور قليلة لا علاقة لها بمحتوى ملفاتك: التحقق من اشتراكك، وإحصاءات استخدام مجهولة، وتقارير الأعطال، وقراءة إعدادات عن بُعد، و— إن طلبت ذلك أنت فقط — تنزيل حزمة لغة لاستخراج النص.</p>
 
-<h2>ما يقرأه التطبيق على جهازك، ولماذا</h2>
-<p>ليجد ما يستحق الحذف يحتاج التطبيق أن ينظر في معرضك. يقرأ:</p>
-<ul>
-<li><strong>البيانات الوصفية</strong> لصورك وفيديوهاتك — الحجم والتاريخ والأبعاد واسم المجلد واسم الملف — ليميّز لقطات الشاشة والفيديوهات الكبيرة والملفات القديمة؛</li>
-<li><strong>محتوى بعض الملفات</strong>، ليثبت أن اثنين متطابقان أو متقاربان. يجري هذا كله في ذاكرة الهاتف، ويبقى بعده بصمة قصيرة في مجلد الكاش الخاص بالتطبيق على جهازك؛</li>
-<li>اختيارياً، <strong>مجلد تمنحه أنت</strong> — يُستعمل فقط لإيجاد نسخ صنعها واتساب من صور موجودة عندك أصلاً، ولكاش الحالات. تمنحه صراحةً وتستطيع سحبه من إعدادات أندرويد متى شئت.</li>
-</ul>
-<p>لا شيء من هذا يُرسَل إلى أي مكان.</p>
+<h2>مستنداتك</h2>
+<p>كل ملف تمسحه أو تستورده أو تفتحه أو تنشئه يبقى في التخزين الخاص بالتطبيق على جهازك، ومعه سجلّ نسخه وتوقيعاتك المحفوظة وأي نص استُخرج منه. لا شيء من ذلك يُرسَل إلى أي مكان، ولا سبيل لدينا لرؤيته.</p>
+<p>لا يرفع التطبيق أي مستند ليعالجه في الخارج. الضغط والتحويل واستخراج النص تقوم بها شيفرة تعمل على هاتفك، لا خدمة على الإنترنت.</p>
 
-<h2>الإعلانات</h2>
-<p>يعرض التطبيق إعلان بانر واحداً عبر <strong>Google AdMob</strong>. لأجل ذلك تصل AdMob معلوماتٌ من جهازك — منها <strong>معرّف الإعلان</strong> ومعلومات الجهاز والتطبيق وموقع تقريبي مشتقّ من عنوان الـIP — وقد تستعملها لاختيار الإعلانات وقياسها. <strong>ولا تصلها صورك ولا محتوى معرضك ولا أي شيء وجده التطبيق فيه.</strong></p>
-<p>معالجة Google لتلك البيانات موصوفة في <a href="https://policies.google.com/technologies/partner-sites">policies.google.com/technologies/partner-sites</a>.</p>
-<p><strong>خياراتك.</strong> تستطيع إعادة ضبط معرّف الإعلان أو حذفه من <em>إعدادات أندرويد ← Google ← الإعلانات</em>. وإن كنت في المنطقة الاقتصادية الأوروبية أو المملكة المتحدة أو سويسرا، يعرض التطبيق نموذج موافقة Google في أول تشغيل ويحترم جوابك. والاشتراك يزيل البانر، ومعه طلبات الإعلان.</p>
+<h2>المسح الضوئي</h2>
+<p>حين تمسح صفحة، يجري الالتقاط على الجهاز — عبر ماسح المستندات في خدمات Google Play على أندرويد، وعبر VisionKit من Apple على iOS. لا يستلم التطبيق سوى الصور الناتجة، وتُحفظ في تخزينه الخاص كأي ملف آخر. ولا يطلب التطبيق الوصول إلى معرض صورك.</p>
+
+<h2>استخراج النص (OCR)</h2>
+<p>استخراج النص يجري كاملاً على جهازك. الحروف اللاتينية يقرأها نموذج مدمج داخل التطبيق، فيعمل بلا إنترنت إطلاقاً. أمّا العربية وبعض اللغات الأخرى فتحتاج حزمة لغة، ينزّلها التطبيق — <strong>فقط حين تختار تلك اللغة</strong> — من مستودع نماذج Tesseract العام على <a href="https://github.com/tesseract-ocr/tessdata_fast">github.com/tesseract-ocr/tessdata_fast</a>. وهو تنزيل عادي لملف نموذج، ولا يُرسَل معه شيء عن مستندك.</p>
 
 <h2>الاشتراك</h2>
-<p>الاشتراك تبيعه وتديره <strong>Google Play Billing</strong>. Google تعالج الدفع، والتطبيق لا يرى بيانات بطاقتك أبداً. يسأل التطبيق Play إن كان حسابك يملك اشتراكاً فعّالاً، ويخزّن جواباً بنعم أو لا على الجهاز فقط. تستطيع الإدارة أو الإلغاء في أي وقت من Google Play.</p>
+<p>تُباع النسخة Pro عبر <strong>Google Play Billing</strong> أو <strong>Apple App Store</strong>، وتدير حالة الاشتراك لنا <strong>RevenueCat</strong>. المتجر يعالج الدفع، والتطبيق لا يرى بيانات بطاقتك أبداً. تعرّف RevenueCat عملية شرائك بمعرّف مجهول تولّده هي — ولا نرسل إليها اسمك ولا بريدك ولا أي حساب لدينا، إذ لا حساب أصلاً. وما يعود هو في جوهره: هل Pro مفعّلة أم لا. تستطيع الإدارة أو الإلغاء في أي وقت من Google Play أو من إعدادات Apple ID.</p>
 
-<h2>ما لا يفعله التطبيق</h2>
-<p>لا تحليلات. لا تقارير أعطال. لا ملفات تعريف للمستخدمين. لا بيع للبيانات. لا تتبّع عبر تطبيقات أو مواقع أخرى. ولا خادم خاص بنا إطلاقاً.</p>
+<h2>إحصاءات الاستخدام وتقارير الأعطال</h2>
+<p>يرسل التطبيق إحصاءات استخدام مجهولة عبر <strong>Firebase Analytics</strong>، وتشخيص الأعطال عبر <strong>Firebase Crashlytics</strong>. وهي خشنة عن قصد، والقاعدة في شيفرتنا قاطعة: <strong>لا اسم ملف، ولا مسار، ولا كلمة مرور، ولا نص مستند، ولا حجم دقيق</strong>.</p>
+<p>ما يمكن أن يحتويه الحدث هو فئة تقريبية — أن ضغطاً انتهى ووفّر «٦٠–٨٠٪»، أن ملفاً كان «٥–٢٠ ميغابايت»، أن مستنداً فيه «٦–٢٠» صفحة — مع أي أداة استُعملت وهل نجحت. وإلى جانبها نسجّل خصائص عامة قليلة: هل أنت على Pro، وأي خطة، ولغة الواجهة، ونمط الأرقام، وأسبوع التثبيت.</p>
+<p>تقارير الأعطال تحوي أثر الاستدعاء وطراز الجهاز وإصدار نظام التشغيل. وهي موجودة ليُعثر على الخلل الذي أصابك ويُصلَح.</p>
+<p>يقرأ التطبيق أيضاً <strong>إعدادات عن بُعد</strong> عبر Firebase، وبها يمكن إبلاغك بأقل إصدار مدعوم. وهذه قراءة، ولا يُرسَل عنك شيء لجلبها.</p>
+
+<h2>لا إعلانات ولا تتبّع</h2>
+<p>لا إعلانات في Lamm PDF، ولا أي حزمة إعلانات. ولا يستعمل التطبيق معرّف الإعلان: على أندرويد صلاحية <code>com.google.android.gms.permission.AD_ID</code> مشالة صراحةً من المانيفست، فلا يمكن جمعها حتى لو حاولت مكتبة إضافتها؛ وعلى iOS لا استعمال لـ IDFA، ولذلك لا يظهر طلب App Tracking Transparency. ولا شيء ممّا يجمعه التطبيق يُستعمل لتتبّعك عبر تطبيقات أو مواقع أخرى، ولا شيء يُباع.</p>
 
 <h2>الأذونات</h2>
-<p><code>READ_MEDIA_IMAGES</code> و<code>READ_MEDIA_VIDEO</code>، وعلى أندرويد ١٤ فما فوق <code>READ_MEDIA_VISUAL_USER_SELECTED</code> للوصول الجزئي. و<code>WAKE_LOCK</code> لتشغيل الفيديو. و<code>INTERNET</code> و<code>ACCESS_NETWORK_STATE</code> للإعلان وللتحقق من الاشتراك. ولا يطلب <code>MANAGE_EXTERNAL_STORAGE</code> عمداً.</p>
+<p><strong>أندرويد.</strong> <code>INTERNET</code> للتحقق من الاشتراك وللإحصاءات وتقارير الأعطال. و<code>USE_BIOMETRIC</code> لقفل التطبيق. والكاميرا معرَّفة كميزة اختيارية، وتُستعمل فقط للالتقاط البديل على الأجهزة التي لا يتوفر فيها ماسح خدمات Play. ولا يطلب التطبيق عمداً <code>READ_MEDIA_IMAGES</code> ولا <code>READ_EXTERNAL_STORAGE</code> ولا <code>MANAGE_EXTERNAL_STORAGE</code> ولا جهات الاتصال ولا الموقع ولا الإشعارات.</p>
+<p><strong>iOS.</strong> الكاميرا، لمسح المستندات. وإضافة فقط إلى مكتبة الصور، تُستعمل حين تطلب حفظ الصور المُصدَّرة في الصور — ولا يستطيع التطبيق قراءة مكتبتك. و Face ID، لفتح التطبيق وتوقيعاتك.</p>
 
-<h2>الحذف</h2>
-<p>حين تؤكّد الحذف، يطلب التطبيق من أندرويد حذف تلك الملفات. يعرض أندرويد تأكيده الخاص، ويبلّغ التطبيق عمّا حذفه أندرويد فعلاً لا عمّا اخترته. والحذف على أندرويد عبر هذا المسار نهائي — لا تذهب الملفات إلى سلة — ولهذا يسأل التطبيق مرتين، ولهذا تُبقي مجموعات المكرر نسخة دائماً.</p>
+<h2>الأمان</h2>
+<p>كلمات مرور المستندات المحفوظة وتوقيعاتك مشفّرة، ومفاتيحها في Keychain على iOS أو Android Keystore، ولا تغادر الجهاز. ومع تفعيل قفل التطبيق تُضبَّب صورته في مبدّل المهام. وتُمحى مجلدات العمل المؤقتة عند انتهاء كل عملية وعند تشغيل التطبيق. ولا تُعدَّل ملفاتك الأصلية في مكانها أبداً: التعديل يُكتب في ملف جديد، وتبقى النسخة السابقة في السجل على الجهاز لتستطيع الرجوع إليها.</p>
 
 <h2>الأطفال</h2>
 <p>التطبيق غير موجَّه إلى الأطفال دون الثالثة عشرة.</p>
+
+<h2>بياناتك وحذفها</h2>
+<p>لا حساب ليُحذف، ولا نحتفظ بمكتبة تخصّك. وحذف التطبيق يزيل مستنداتك ونسخها وتوقيعاتك وإعداداتك من الجهاز. وإن أردت حذف سجلات الشراء أو الإحصاءات أو الأعطال المجهولة المرتبطة بتثبيتك، راسلنا على العنوان أدناه وسنطلب من مزوّدينا حذفها.</p>
 
 <h2>التغييرات</h2>
 <p>إن تغيّرت هذه السياسة، تغيّر التاريخ في أعلاها معها.</p>
