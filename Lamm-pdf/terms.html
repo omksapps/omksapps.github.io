@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lamm PDF — Lamm</title>
+<style>:root{
+  --paper:#F7F8F6; --surface:#FFFFFF; --rule:#E2E5E0;
+  --ink:#17211D; --soft:#5A655F; --emerald:#0A5C48; --gold:#C9A962;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#10120F;--surface:#1A1D1A;--rule:#2E332E;
+        --ink:#E8EBE7;--soft:#9EA8A2;--emerald:#3FA789;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-size:17px;line-height:1.75;
+  font-family:"IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:56px 22px 90px}
+a{color:var(--emerald)}
+.brand{display:flex;align-items:center;gap:14px;margin-bottom:40px}
+.brand .name{font-size:22px;font-weight:600;letter-spacing:.01em}
+h1{font-size:clamp(28px,5vw,38px);line-height:1.2;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-size:20px;margin:36px 0 10px}
+.updated{color:var(--soft);font-size:14.5px;margin:0 0 28px}
+p,li{color:var(--ink)}
+.soft{color:var(--soft)}
+code{font-family:ui-monospace,Menlo,monospace;font-size:14.5px;background:var(--surface);
+  border:1px solid var(--rule);border-radius:6px;padding:1px 6px;direction:ltr;unicode-bidi:isolate}
+hr{border:0;border-top:1px solid var(--rule);margin:52px 0}
+footer{color:var(--soft);font-size:14px;margin-top:52px;padding-top:20px;border-top:1px solid var(--rule)}
+[dir=rtl]{text-align:right}
+
+.hero{display:flex;align-items:center;gap:16px;margin:6px 0 4px}
+.tag{color:var(--soft);font-size:18px;margin:0 0 32px}
+.links{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.links a{border:1px solid var(--rule);border-radius:12px;padding:11px 18px;
+  text-decoration:none;background:var(--surface)}
+.crumb{font-size:14.5px;color:var(--soft);margin-bottom:26px}
+</style>
+<div class="wrap">
+    <p class="crumb"><a href="../">Lamm</a> · Lamm PDF</p>
+    <div class="hero"><svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 52 52">
+        <defs><clipPath id="m"><rect x="0" y="0" width="34" height="34" rx="10"/></clipPath></defs>
+        <rect x="0" y="0" width="34" height="34" rx="10" fill="#0A5C48"/>
+        <rect x="18" y="18" width="34" height="34" rx="10" fill="#0A5C48"/>
+        <g clip-path="url(#m)"><rect x="18" y="18" width="34" height="34" rx="10" fill="#C9A962"/></g>
+    </svg><h1 style="margin:0">Lamm PDF</h1></div>
+    <p class="tag">Every PDF tool. One calm app.</p>
+    <p>Lamm PDF turns your phone into a complete PDF workshop. Scan paper into
+        clean documents, sign a contract with your finger, shrink a file until it
+        fits an email, merge and split, convert to and from images, and find a
+        word inside a scan — in Arabic as well as English.</p>
+    <p>Every tool runs on your own device. Your documents are never uploaded,
+        and there is no account to create. The app uses the network only to check
+        whether you have subscribed, and to send anonymous diagnostics that never
+        include a file name or anything your documents say.</p>
+    <div class="links">
+        <a href="privacy.html">Privacy Policy · سياسة الخصوصية</a>
+        <a href="terms.html">Terms of Use · شروط الاستخدام</a>
+    </div>
+    <footer>Lamm — a small family of tools by OMK Software.</footer>
+</div>
