@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lamm PDF — Every PDF tool. One calm app.</title>
+<meta name="description" content="Scan, sign, merge, compress and convert PDFs. Every tool runs on your phone — no uploads, no ads, no account. In Arabic and English.">
+<meta property="og:title" content="Lamm PDF — Every PDF tool. One calm app.">
+<meta property="og:description" content="Scan, sign, merge, compress and convert PDFs — privately, on your phone.">
+<meta name="theme-color" content="#285B49">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Crect width='1024' height='1024' rx='230' fill='%23285B49'/%3E%3Crect x='234' y='264' width='520' height='520' rx='145' fill='%23F7F8F6'/%3E%3Crect x='330' y='180' width='460' height='460' rx='128' fill='%23C4AA6C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Tokens from docs/LAMM_BRAND.md — shared with the Lamm QR page */
+:root{
+  --bg:#F7F8F6; --surface:#FFFFFF; --sunken:#EDF0EC; --border:#DFE4DE;
+  --text:#16211D; --text2:#4E5A55; --text3:#7C8781;
+  --accent:#285B49; --accent-pressed:#1E4638; --accent-soft:#E6EEEA; --on-accent:#FFFFFF;
+  --gold:#C4AA6C; --gold-soft:#F5EEDF;
+  --success:#0F9184; --danger:#C53B33;
+  --c-organize:#2F6D8C; --c-convert:#0F9184; --c-edit:#6B5BA6; --c-security:#C53B33; --c-optimize:#C4863A;
+  --brand:#285B49; --brand-deep:#1E4A3A; --paper:#F7F8F6;
+  --shadow:0 1px 2px rgba(22,33,29,.06),0 12px 32px -12px rgba(22,33,29,.18);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0E1512; --surface:#16211D; --sunken:#101A16; --border:#26332D;
+    --text:#EDF2EF; --text2:#A6B3AD; --text3:#7A8781;
+    --accent:#5E9C85; --accent-pressed:#74B29A; --accent-soft:#17302A; --on-accent:#0B1310;
+    --gold:#D9BE83; --gold-soft:#2A2318;
+    --success:#2BB3A3; --danger:#E5645B;
+    --c-organize:#5FA3BF; --c-convert:#2BB3A3; --c-edit:#9C8BD6; --c-security:#E5645B; --c-optimize:#E0A93F;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -16px rgba(0,0,0,.6);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:400 16px/1.6 Inter,"IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+[dir=rtl] body{font-family:"IBM Plex Sans Arabic",Inter,system-ui,sans-serif;line-height:1.75}
+a{color:var(--accent)}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);
+  border-bottom:1px solid transparent;transition:border-color .2s}
+nav.scrolled{border-bottom-color:var(--border)}
+nav .container{display:flex;align-items:center;gap:16px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:700;font-size:18px}
+.logo svg{width:32px;height:32px;flex:none}
+.nav-links{margin-inline-start:auto;display:flex;align-items:center;gap:6px}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:15px;padding:8px 12px;border-radius:10px}
+.nav-links a:hover{color:var(--text);background:var(--sunken)}
+.lang{font:inherit;font-size:14px;font-weight:600;color:var(--text);background:var(--surface);
+  border:1px solid var(--border);border-radius:999px;padding:7px 14px;cursor:pointer}
+.lang:hover{border-color:var(--text3)}
+@media (max-width:640px){.nav-links a.hide-sm{display:none}}
+
+/* Hero */
+.hero{padding:72px 0 88px;overflow:hidden}
+.hero .container{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent);
+  font-size:13.5px;font-weight:600;padding:6px 12px;border-radius:999px;margin-bottom:22px}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.03em;margin:0 0 20px;font-weight:700}
+[dir=rtl] h1{letter-spacing:0;line-height:1.25}
+h1 .soft{color:var(--accent)}
+.lead{font-size:clamp(17px,2vw,19.5px);color:var(--text2);margin:0 0 32px;max-width:34em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:16px;
+  padding:14px 22px;border-radius:14px;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{background:var(--accent-pressed)}
+.btn-primary svg{width:20px;height:20px}
+.btn-ghost{color:var(--text2);border:1px solid var(--border);background:var(--surface);cursor:default}
+.trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:28px;color:var(--text3);font-size:14.5px;list-style:none;padding:0}
+.trust li{display:flex;align-items:center;gap:7px}
+.trust svg{width:16px;height:16px;color:var(--success)}
+
+/* Phone mockup: the Compress result screen */
+.stage{position:relative;display:flex;justify-content:center;width:fit-content;margin:0 auto;text-align:start}
+.stage::before{content:"";position:absolute;inset:8% -10% 0;background:radial-gradient(closest-side,var(--accent-soft),transparent);z-index:0}
+.phone{position:relative;z-index:1;width:300px;aspect-ratio:300/610;border-radius:46px;padding:10px;
+  background:#0B1310;box-shadow:var(--shadow),0 40px 80px -30px rgba(22,33,29,.45)}
+.screen{position:relative;height:100%;border-radius:37px;overflow:hidden;background:var(--bg);
+  display:flex;flex-direction:column;padding:44px 16px 16px}
+.bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.bar b{font-size:17px}
+.bar span{font-size:12px;color:var(--text3)}
+.doc{position:relative;flex:1;min-height:0;background:var(--sunken);border-radius:20px;display:grid;place-items:center;overflow:hidden}
+.page{width:58%;aspect-ratio:1/1.32;background:#fff;border-radius:6px;padding:11% 10%;
+  box-shadow:0 10px 26px rgba(0,0,0,.18);display:flex;flex-direction:column;gap:7px;
+  animation:squeeze 3.2s ease-in-out infinite}
+.page i{display:block;height:5px;border-radius:3px;background:#D7DCD6}
+.page i.h{height:9px;width:62%;background:#285B49;margin-bottom:4px}
+.page i.s{width:72%}
+.page i.img{height:auto;flex:1;background:linear-gradient(135deg,#C4AA6C,#E7D9B5);border-radius:5px;margin:4px 0}
+.page .sig{margin-top:auto;align-self:flex-end;width:44%;height:auto;color:#2F3E8C}
+@keyframes squeeze{0%,100%{transform:scale(1)}50%{transform:scale(.9)}}
+.result{margin-top:14px;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:14px;
+  animation:rise .9s cubic-bezier(.2,.8,.2,1) .4s both}
+@keyframes rise{from{transform:translateY(40px);opacity:0}}
+.sizes{display:flex;align-items:baseline;gap:8px;font-weight:700}
+.sizes s{color:var(--text3);font-weight:500;font-size:14px}
+.sizes b{font-size:22px}
+.sizes em{font-style:normal;margin-inline-start:auto;font-size:12px;font-weight:700;color:var(--success);
+  background:color-mix(in srgb,var(--success) 12%,transparent);padding:3px 8px;border-radius:999px}
+.meter{height:6px;border-radius:3px;background:var(--sunken);margin:10px 0 6px;overflow:hidden}
+.meter i{display:block;height:100%;width:23%;border-radius:3px;background:var(--success);animation:fill 1.4s cubic-bezier(.2,.8,.2,1) .8s both}
+@keyframes fill{from{width:100%}}
+.result small{display:block;font-size:11.5px;color:var(--text2)}
+.save{display:block;text-align:center;background:var(--accent);color:var(--on-accent);font-weight:600;font-size:15px;
+  padding:11px;border-radius:12px;margin-top:12px}
+.float{position:absolute;z-index:2;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:10px 14px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600}
+.float .ic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center}
+.float .ic svg{width:18px;height:18px}
+.float small{display:block;font-weight:400;color:var(--text3);font-size:12px}
+.f1{top:14%;inset-inline-start:-10%;animation:bob 5s ease-in-out infinite}
+.f2{top:47%;inset-inline-end:-10%;animation:bob 5s ease-in-out 1.2s infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+
+/* Sections */
+section{padding:88px 0}
+.sec-head{max-width:640px;margin:0 auto 48px;text-align:center}
+.kicker{color:var(--accent);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
+[dir=rtl] .kicker{letter-spacing:0}
+h2{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.02em;margin:0 0 14px}
+[dir=rtl] h2{letter-spacing:0;line-height:1.35}
+.sec-head p{color:var(--text2);font-size:18px;margin:0}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:26px;
+  transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.card .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.card .ic svg{width:24px;height:24px}
+.card h3{font-size:18px;margin:0 0 6px}
+.card p{margin:0;color:var(--text2);font-size:15.5px}
+
+/* Tool chips */
+.tools{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:28px;padding:0;list-style:none}
+.tools li{font-size:14.5px;color:var(--text2);background:var(--surface);border:1px solid var(--border);
+  border-radius:999px;padding:7px 14px}
+
+/* How it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.step{position:relative;padding:26px;border-radius:22px;background:var(--sunken)}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--border);font-weight:700;color:var(--accent);margin-bottom:16px}
+.step h3{margin:0 0 6px;font-size:18px}
+.step p{margin:0;color:var(--text2);font-size:15.5px}
+
+/* Privacy band */
+.band{background:var(--brand);color:var(--paper);border-radius:32px;padding:64px 48px;
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+.band::after{content:"";position:absolute;width:340px;height:340px;inset-inline-end:-90px;top:-110px;border-radius:90px;
+  background:var(--brand-deep);transform:rotate(12deg)}
+.band > *{position:relative;z-index:1}
+.band .kicker{color:rgba(247,248,246,.8)}
+.band h2{color:var(--paper)}
+.band p{color:rgba(247,248,246,.78);font-size:17.5px;margin:0}
+.band ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.band li{display:flex;gap:14px;align-items:flex-start;background:rgba(247,248,246,.08);border:1px solid rgba(247,248,246,.14);
+  border-radius:18px;padding:16px 18px}
+.band li svg{width:22px;height:22px;flex:none;color:#C4AA6C;margin-top:2px}
+.band li b{display:block;color:var(--paper)}
+.band li span{color:rgba(247,248,246,.72);font-size:14.5px}
+.band a{color:var(--paper)}
+
+/* Bilingual */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.duo .card{text-align:center;padding:34px 26px}
+.duo .big{font-size:clamp(24px,3.2vw,32px);font-weight:700;margin:0 0 6px}
+.duo .big[lang=ar]{font-family:"IBM Plex Sans Arabic",sans-serif}
+
+/* CTA + footer */
+.final{text-align:center}
+.final .ctas{justify-content:center}
+footer{border-top:1px solid var(--border);padding:36px 0 48px;color:var(--text3);font-size:14.5px}
+footer .container{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+footer a{color:var(--text2);text-decoration:none}
+footer a:hover{color:var(--text)}
+footer .spacer{margin-inline-start:auto}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero{padding:40px 0 64px}
+  .hero .container{grid-template-columns:1fr;gap:48px;text-align:center}
+  .lead{margin-inline:auto}
+  .ctas,.trust{justify-content:center}
+  .grid,.steps{grid-template-columns:1fr 1fr}
+  .band{grid-template-columns:1fr;padding:44px 26px}
+}
+@media (max-width:600px){
+  section{padding:64px 0}
+  .grid,.steps,.duo{grid-template-columns:1fr}
+  .phone{width:260px}
+  .f1{inset-inline-start:-4%}.f2{inset-inline-end:-4%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- Phosphor-style line icons -->
+  <symbol id="i-check" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" d="M40 144l56 56L224 72"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M176 40h40v40M80 216H40v-40M216 176v40h-40M40 80V40h40"/><rect x="88" y="76" width="80" height="104" rx="8"/></g></symbol>
+  <symbol id="i-pen" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M92 216H48v-44L168 52l44 44Z"/><path d="M136 84l44 44"/><path d="M144 216h72"/></g></symbol>
+  <symbol id="i-compress" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M152 56v48h48M104 200v-48H56M152 104l56-56M104 152l-56 56"/></g></symbol>
+  <symbol id="i-stack" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M32 176l96 56 96-56M32 128l96 56 96-56M32 80l96 56 96-56-96-56Z"/></g></symbol>
+  <symbol id="i-swap" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M176 40l40 40-40 40M216 80H72M80 216l-40-40 40-40M40 176h144"/></g></symbol>
+  <symbol id="i-text" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M56 80V56h104v24M108 56v128M88 184h40"/><circle cx="180" cy="164" r="28"/><path d="M200 184l24 24"/></g></symbol>
+  <symbol id="i-lock" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><rect x="40" y="88" width="176" height="128" rx="8"/><path d="M92 88V56a36 36 0 0 1 72 0v32"/></g></symbol>
+  <symbol id="i-cloud-x" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M80 200a56 56 0 1 1 14-110 72 72 0 0 1 138 30 40 40 0 0 1-24 80Z"/><path d="M48 40l160 176"/></g></symbol>
+  <symbol id="i-prohibit" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><circle cx="128" cy="128" r="96"/><path d="M60 60l136 136"/></g></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M4.2 2.4c-.2.2-.3.6-.3 1v17.2c0 .4.1.8.3 1l9.6-9.6L4.2 2.4Zm10.6 10.6 2.6 2.6-10.7 6.1c-.4.2-.8.2-1.1.1l9.2-8.8Zm0-2-9.2-8.8c.3-.1.7-.1 1.1.1l10.7 6.1-2.6 2.6Zm3.6-2 2.9 1.7c.8.5.8 1.3 0 1.8l-2.9 1.7-2.8-2.6 2.8-2.6Z"/></symbol>
+  <symbol id="mark" viewBox="0 0 1024 1024"><rect width="1024" height="1024" rx="230" fill="#285B49"/><rect x="234" y="264" width="520" height="520" rx="145" fill="#F7F8F6"/><rect x="330" y="180" width="460" height="460" rx="128" fill="#C4AA6C"/></symbol>
+</svg>
+
+<nav id="nav">
+  <div class="container">
+    <a class="logo" href="#top"><svg aria-hidden="true"><use href="#mark"/></svg><span class="ltr">Lamm PDF</span></a>
+    <div class="nav-links">
+      <a class="hide-sm" href="#features" data-i18n="nav_features">Features</a>
+      <a class="hide-sm" href="#privacy" data-i18n="nav_privacy">Privacy</a>
+      <button class="lang" id="lang" type="button" aria-label="Switch language">العربية</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container">
+    <div>
+      <span class="eyebrow"><i></i><span data-i18n="eyebrow">No uploads. No ads. No account.</span></span>
+      <h1 data-i18n-html="h1">Every PDF tool.<br><span class="soft">One calm app.</span></h1>
+      <p class="lead" data-i18n="lead">Scan paper into clean documents, sign a contract with your finger, shrink a file until it fits an email — and find a word inside a scan. All on your phone.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.omk.lamm.pdf">
+          <svg aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="cta_play">Get it on Google Play</span></a>
+        <span class="btn btn-ghost" data-i18n="cta_ios">iPhone — coming soon</span>
+      </div>
+      <ul class="trust">
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="t1">Files never leave your phone</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="t2">Arabic &amp; English</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="t3">No watermarks, ever</span></li>
+      </ul>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="phone">
+        <div class="screen">
+          <div class="bar"><b data-i18n="m_title">Compress</b><span data-i18n="m_pages">12 pages</span></div>
+          <div class="doc">
+            <div class="page">
+              <i class="h"></i><i></i><i></i><i class="s"></i><i class="img"></i><i></i><i class="s"></i>
+              <svg class="sig" viewBox="0 0 120 40"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" d="M4 30c10-18 18-24 22-14s-6 18 0 12 14-26 22-18-4 20 6 14 12-14 20-10 6 10 16 6 14-8 26-10"/></svg>
+            </div>
+          </div>
+          <div class="result">
+            <div class="sizes"><s class="ltr" data-i18n="m_from">8.4 MB</s><b class="ltr" data-i18n="m_to">1.9 MB</b><em data-i18n="m_saved">−77%</em></div>
+            <div class="meter"><i></i></div>
+            <small data-i18n="m_note">Text pages untouched. Original kept.</small>
+            <span class="save" data-i18n="m_save">Save copy</span>
+          </div>
+        </div>
+      </div>
+      <div class="float f1"><span class="ic" style="color:var(--c-edit);background:color-mix(in srgb,var(--c-edit) 12%,transparent)"><svg><use href="#i-pen"/></svg></span>
+        <div><span data-i18n="f1">Contract signed</span><small data-i18n="f1s">With your finger</small></div></div>
+      <div class="float f2"><span class="ic" style="color:var(--c-convert);background:color-mix(in srgb,var(--c-convert) 12%,transparent)"><svg><use href="#i-text"/></svg></span>
+        <div><span data-i18n="f2">Text found</span><small data-i18n="f2s">Inside a scan, in Arabic</small></div></div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="kicker" data-i18n="feat_k">A complete PDF workshop</p>
+      <h2 data-i18n="feat_h">Everything you do with documents</h2>
+      <p data-i18n="feat_p">From a crumpled receipt to a signed contract — scan it, fix it, shrink it and send it, without switching apps.</p>
+    </div>
+    <div class="grid">
+      <div class="card reveal" style="--c:var(--c-organize)"><div class="ic"><svg><use href="#i-scan"/></svg></div>
+        <h3 data-i18n="c1h">Scan like a scanner</h3><p data-i18n="c1p">Edge detection, perspective correction and a black-and-white filter that makes a photo look truly scanned.</p></div>
+      <div class="card reveal" style="--c:var(--c-edit)"><div class="ic"><svg><use href="#i-pen"/></svg></div>
+        <h3 data-i18n="c2h">Sign &amp; fill</h3><p data-i18n="c2p">Fill real form fields, or place text, check marks and dates anywhere. Your signature is stored encrypted.</p></div>
+      <div class="card reveal" style="--c:var(--c-optimize)"><div class="ic"><svg><use href="#i-compress"/></svg></div>
+        <h3 data-i18n="c3h">Compress smartly</h3><p data-i18n="c3p">Shrink scans until they fit an email, while text pages stay untouched — so a file never grows.</p></div>
+      <div class="card reveal" style="--c:var(--c-organize)"><div class="ic"><svg><use href="#i-stack"/></svg></div>
+        <h3 data-i18n="c4h">Merge &amp; organise</h3><p data-i18n="c4p">Merge, split, reorder, rotate and crop pages — or trim white margins automatically.</p></div>
+      <div class="card reveal" style="--c:var(--c-convert)"><div class="ic"><svg><use href="#i-swap"/></svg></div>
+        <h3 data-i18n="c5h">Convert</h3><p data-i18n="c5p">Images to PDF, PDF to images, PDF to text — the formats you actually need, both ways.</p></div>
+      <div class="card reveal" style="--c:var(--c-security)"><div class="ic"><svg><use href="#i-text"/></svg></div>
+        <h3 data-i18n="c6h">Search inside scans</h3><p data-i18n="c6p">Text recognition in Arabic and English adds a searchable layer, so a scan reads like a real document.</p></div>
+    </div>
+    <ul class="tools reveal">
+      <li data-i18n="x1">Watermark</li><li data-i18n="x2">Page numbers</li><li data-i18n="x3">Password protect</li>
+      <li data-i18n="x4">Redact</li><li data-i18n="x5">Annotate</li><li data-i18n="x6">Stamps</li>
+      <li data-i18n="x7">ID card mode</li><li data-i18n="x8">Grayscale</li><li data-i18n="x9">Version history</li>
+    </ul>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="kicker" data-i18n="how_k">How it works</p>
+      <h2 data-i18n="how_h">Three taps, no surprises</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3 data-i18n="s1h">Scan or open</h3><p data-i18n="s1p">Scan paper with the camera, or open a PDF from Files, WhatsApp or your email.</p></div>
+      <div class="step reveal"><h3 data-i18n="s2h">Pick a tool</h3><p data-i18n="s2p">Every tool works on your device, in seconds, with or without a connection.</p></div>
+      <div class="step reveal"><h3 data-i18n="s3h">Save a new copy</h3><p data-i18n="s3p">Your original is never overwritten. Earlier versions stay in history if you change your mind.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" style="padding-top:0">
+  <div class="container">
+    <div class="band reveal">
+      <div>
+        <p class="kicker" data-i18n="pv_k">Private by design</p>
+        <h2 data-i18n="pv_h">Your documents never leave your phone</h2>
+        <p data-i18n-html="pv_p">Contracts, IDs, bank statements — they stay on your device. No server of ours ever sees them. <a href="privacy.html">Read the privacy policy</a></p>
+      </div>
+      <ul>
+        <li><svg><use href="#i-cloud-x"/></svg><div><b data-i18n="pv1h">No uploads</b><span data-i18n="pv1p">Compression, conversion and OCR run on your phone, not on a server.</span></div></li>
+        <li><svg><use href="#i-prohibit"/></svg><div><b data-i18n="pv2h">No ads, no account</b><span data-i18n="pv2p">No advertising SDK, no advertising ID, nothing to sign up for.</span></div></li>
+        <li><svg><use href="#i-lock"/></svg><div><b data-i18n="pv3h">Locked &amp; redacted for real</b><span data-i18n="pv3p">App lock with Face ID or fingerprint, and redaction that removes the text, not just covers it.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="kicker" data-i18n="bi_k">Arabic, properly</p>
+      <h2 data-i18n="bi_h">Made for Arabic and English</h2>
+      <p data-i18n="bi_p">Right-to-left everywhere, Arabic-Indic numerals, Arabic page numbers — and Arabic text that shapes correctly in the files you export.</p>
+    </div>
+    <div class="duo">
+      <div class="card reveal"><p class="big" lang="en">Every PDF tool. One calm app.</p><p style="margin:0;color:var(--text3)">English</p></div>
+      <div class="card reveal" dir="rtl"><p class="big" lang="ar">كل أدوات PDF في تطبيق واحد هادئ.</p><p style="margin:0;color:var(--text3)">العربية</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="container reveal">
+    <h2 data-i18n="fin_h">Free to use, every day.</h2>
+    <p class="lead" style="margin-inline:auto" data-i18n="fin_p">Scan, sign, merge and convert for free — with daily Pro actions included. Pro removes the limits, monthly, yearly or once for good.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.omk.lamm.pdf">
+        <svg aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="cta_play">Get it on Google Play</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a class="logo" href="../" style="font-size:15px"><svg aria-hidden="true" style="width:24px;height:24px"><use href="#mark"/></svg><span data-i18n="family">A Lamm app by OMK Software</span></a>
+    <span class="spacer"></span>
+    <a href="privacy.html" data-i18n="ft_privacy">Privacy Policy</a>
+    <a href="terms.html" data-i18n="ft_terms">Terms of Use</a>
+    <a href="mailto:omksapps@gmail.com" class="ltr">omksapps@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+// Language: English is the page's own text; Arabic swaps it in.
+(function(){
+  var ar={
+    nav_features:'المزايا',nav_privacy:'الخصوصية',
+    eyebrow:'بلا رفع للملفات. بلا إعلانات. بلا حساب.',
+    h1:'كل أدوات PDF.<br><span class="soft">في تطبيق واحد هادئ.</span>',
+    lead:'امسح الأوراق إلى مستندات نظيفة، ووقّع العقود بإصبعك، وصغّر الملف ليُرسل بالبريد — وابحث عن كلمة داخل مستند ممسوح. كل ذلك على هاتفك.',
+    cta_play:'حمّله من Google Play',cta_ios:'آيفون — قريبًا',
+    t1:'ملفاتك لا تغادر هاتفك',t2:'عربي وإنجليزي',t3:'بلا علامات مائية أبدًا',
+    m_title:'ضغط',m_pages:'١٢ صفحة',m_from:'٨٫٤ م.ب',m_to:'١٫٩ م.ب',m_saved:'−٧٧٪',
+    m_note:'صفحات النص لم تُمسّ. الأصل محفوظ.',m_save:'احفظ نسخة',
+    f1:'تم توقيع العقد',f1s:'بإصبعك',f2:'تم العثور على النص',f2s:'داخل مستند ممسوح، بالعربية',
+    feat_k:'ورشة PDF كاملة',feat_h:'كل ما تفعله بالمستندات',
+    feat_p:'من إيصال مجعّد إلى عقد موقّع — امسحه وعدّله وصغّره وأرسله، دون التنقل بين التطبيقات.',
+    c1h:'مسح كالماسح الحقيقي',c1p:'كشف الحواف وتصحيح الميل وفلتر أبيض وأسود يجعل الصورة تبدو كمسح حقيقي.',
+    c2h:'التوقيع والتعبئة',c2p:'عبّئ حقول النماذج، أو ضع نصًا وعلامات وتواريخ في أي مكان. توقيعك يُحفظ مشفّرًا.',
+    c3h:'ضغط ذكي',c3p:'صغّر الملفات الممسوحة لتُرسل بالبريد، بينما تبقى صفحات النص كما هي — فلا يكبر الملف أبدًا.',
+    c4h:'الدمج والترتيب',c4p:'ادمج وقسّم وأعد الترتيب ودوّر وقصّ الصفحات — أو أزل الهوامش البيضاء تلقائيًا.',
+    c5h:'التحويل',c5p:'من الصور إلى PDF، ومن PDF إلى صور أو نص — الصيغ التي تحتاجها فعلًا، في الاتجاهين.',
+    c6h:'ابحث داخل المسح',c6p:'التعرّف الضوئي على النص بالعربية والإنجليزية يضيف طبقة قابلة للبحث، فيُقرأ المسح كمستند حقيقي.',
+    x1:'علامة مائية',x2:'ترقيم الصفحات',x3:'حماية بكلمة مرور',x4:'حجب',x5:'تعليقات',x6:'أختام',
+    x7:'وضع بطاقة الهوية',x8:'تدرّج رمادي',x9:'سجل النسخ',
+    how_k:'كيف يعمل',how_h:'ثلاث لمسات، بلا مفاجآت',
+    s1h:'امسح أو افتح',s1p:'امسح الأوراق بالكاميرا، أو افتح ملف PDF من الملفات أو واتساب أو بريدك.',
+    s2h:'اختر أداة',s2p:'كل أداة تعمل على جهازك، خلال ثوانٍ، مع اتصال أو من دونه.',
+    s3h:'احفظ نسخة جديدة',s3p:'لا يُستبدل ملفك الأصلي أبدًا، وتبقى النسخ السابقة في السجل إن غيّرت رأيك.',
+    pv_k:'الخصوصية في الأساس',pv_h:'مستنداتك لا تغادر هاتفك',
+    pv_p:'العقود والهويات وكشوف الحسابات — تبقى على جهازك، ولا يراها أي خادم لنا. <a href="privacy.html">اقرأ سياسة الخصوصية</a>',
+    pv1h:'بلا رفع للملفات',pv1p:'الضغط والتحويل والتعرّف على النص تعمل على هاتفك، لا على خادم.',
+    pv2h:'بلا إعلانات ولا حساب',pv2p:'لا حزمة إعلانات، ولا معرّف إعلان، ولا شيء للتسجيل فيه.',
+    pv3h:'قفل وحجب حقيقي',pv3p:'قفل التطبيق ببصمة الوجه أو الإصبع، وحجب يزيل النص فعليًا لا يغطيه فقط.',
+    bi_k:'العربية كما ينبغي',bi_h:'صُنع للعربية والإنجليزية',
+    bi_p:'واجهة من اليمين إلى اليسار في كل مكان، وأرقام عربية، وترقيم صفحات بالعربية — ونص عربي يظهر متصلًا وصحيحًا في الملفات التي تصدّرها.',
+    fin_h:'مجاني للاستخدام، كل يوم.',
+    fin_p:'امسح ووقّع وادمج وحوّل مجانًا — مع استخدامات Pro يومية مشمولة. ويزيل Pro الحدود، شهريًا أو سنويًا أو مرة واحدة إلى الأبد.',
+    family:'أحد تطبيقات Lamm من OMK Software',ft_privacy:'سياسة الخصوصية',ft_terms:'شروط الاستخدام'
+  };
+  var nodes=[].slice.call(document.querySelectorAll('[data-i18n],[data-i18n-html]'));
+  nodes.forEach(function(el){el._en=el.innerHTML});
+  var btn=document.getElementById('lang');
+  function apply(lang){
+    var isAr=lang==='ar';
+    document.documentElement.lang=lang;document.documentElement.dir=isAr?'rtl':'ltr';
+    nodes.forEach(function(el){
+      var k=el.getAttribute('data-i18n')||el.getAttribute('data-i18n-html');
+      if(isAr&&ar[k]!=null){if(el.hasAttribute('data-i18n-html'))el.innerHTML=ar[k];else el.textContent=ar[k]}
+      else el.innerHTML=el._en;
+    });
+    btn.textContent=isAr?'English':'العربية';
+    document.title=isAr?'Lamm PDF — كل أدوات PDF في تطبيق واحد هادئ':'Lamm PDF — Every PDF tool. One calm app.';
+    try{localStorage.setItem('lammpdf-lang',lang)}catch(e){}
+  }
+  var saved=null;try{saved=localStorage.getItem('lammpdf-lang')}catch(e){}
+  var initial=new URLSearchParams(location.search).get('lang')||saved||((navigator.language||'').slice(0,2)==='ar'?'ar':'en');
+  if(initial==='ar')apply('ar');
+  btn.addEventListener('click',function(){apply(document.documentElement.lang==='ar'?'en':'ar')});
+})();
+
+// Nav border on scroll, reveal on view.
+(function(){
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>8)},{passive:true});
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
