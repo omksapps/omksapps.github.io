@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lamm QR — Scan safely. Create beautifully.</title>
+<meta name="description" content="Scan any QR code or barcode and see what it does before anything opens. Design beautiful QR codes. No ads, no account, in Arabic and English.">
+<meta property="og:title" content="Lamm QR — Scan safely. Create beautifully.">
+<meta property="og:description" content="Scan any QR or barcode safely, and design beautiful QR codes. No ads.">
+<meta name="theme-color" content="#285B49">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'%3E%3Cdefs%3E%3Cmask id='m'%3E%3Crect x='200' y='200' width='440' height='440' rx='122' fill='%23fff'/%3E%3Crect x='310' y='310' width='224' height='224' rx='64'/%3E%3C/mask%3E%3C/defs%3E%3Crect width='1024' height='1024' rx='230' fill='%23285B49'/%3E%3Crect x='200' y='200' width='440' height='440' rx='122' fill='%23F7F8F6' mask='url(%23m)'/%3E%3Crect x='372' y='372' width='100' height='100' rx='30' fill='%23C4AA6C'/%3E%3Crect x='560' y='560' width='264' height='264' rx='78' fill='%23F7F8F6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Tokens from docs/LAMM_BRAND.md */
+:root{
+  --bg:#F7F8F6; --surface:#FFFFFF; --sunken:#EDF0EC; --border:#DFE4DE;
+  --text:#16211D; --text2:#4E5A55; --text3:#7C8781;
+  --accent:#285B49; --accent-pressed:#1E4638; --accent-soft:#E6EEEA; --on-accent:#FFFFFF;
+  --gold:#C4AA6C; --gold-soft:#F5EEDF;
+  --success:#0F9184; --danger:#C53B33;
+  --c-organize:#2F6D8C; --c-convert:#0F9184; --c-edit:#6B5BA6; --c-security:#C53B33; --c-optimize:#C4863A;
+  --brand:#285B49; --brand-deep:#1E4A3A; --paper:#F7F8F6;
+  --shadow:0 1px 2px rgba(22,33,29,.06),0 12px 32px -12px rgba(22,33,29,.18);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0E1512; --surface:#16211D; --sunken:#101A16; --border:#26332D;
+    --text:#EDF2EF; --text2:#A6B3AD; --text3:#7A8781;
+    --accent:#5E9C85; --accent-pressed:#74B29A; --accent-soft:#17302A; --on-accent:#0B1310;
+    --gold:#D9BE83; --gold-soft:#2A2318;
+    --success:#2BB3A3; --danger:#E5645B;
+    --c-organize:#5FA3BF; --c-convert:#2BB3A3; --c-edit:#9C8BD6; --c-security:#E5645B; --c-optimize:#E0A93F;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px -16px rgba(0,0,0,.6);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:400 16px/1.6 Inter,"IBM Plex Sans Arabic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased}
+[dir=rtl] body{font-family:"IBM Plex Sans Arabic",Inter,system-ui,sans-serif;line-height:1.75}
+a{color:var(--accent)}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);
+  border-bottom:1px solid transparent;transition:border-color .2s}
+nav.scrolled{border-bottom-color:var(--border)}
+nav .container{display:flex;align-items:center;gap:16px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-weight:700;font-size:18px}
+.logo svg{width:32px;height:32px;flex:none}
+.nav-links{margin-inline-start:auto;display:flex;align-items:center;gap:6px}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:15px;padding:8px 12px;border-radius:10px}
+.nav-links a:hover{color:var(--text);background:var(--sunken)}
+.lang{font:inherit;font-size:14px;font-weight:600;color:var(--text);background:var(--surface);
+  border:1px solid var(--border);border-radius:999px;padding:7px 14px;cursor:pointer}
+.lang:hover{border-color:var(--text3)}
+@media (max-width:640px){.nav-links a.hide-sm{display:none}}
+
+/* Hero */
+.hero{padding:72px 0 88px;overflow:hidden}
+.hero .container{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent);
+  font-size:13.5px;font-weight:600;padding:6px 12px;border-radius:999px;margin-bottom:22px}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.03em;margin:0 0 20px;font-weight:700}
+[dir=rtl] h1{letter-spacing:0;line-height:1.25}
+h1 .soft{color:var(--accent)}
+.lead{font-size:clamp(17px,2vw,19.5px);color:var(--text2);margin:0 0 32px;max-width:34em}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:600;font-size:16px;
+  padding:14px 22px;border-radius:14px;transition:transform .15s,background .15s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{background:var(--accent-pressed)}
+.btn-primary svg{width:20px;height:20px}
+.btn-ghost{color:var(--text2);border:1px solid var(--border);background:var(--surface);cursor:default}
+.trust{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:28px;color:var(--text3);font-size:14.5px;list-style:none;padding:0}
+.trust li{display:flex;align-items:center;gap:7px}
+.trust svg{width:16px;height:16px;color:var(--success)}
+
+/* Phone mockup */
+.stage{position:relative;display:flex;justify-content:center;width:fit-content;margin:0 auto;text-align:start}
+.stage::before{content:"";position:absolute;inset:8% -10% 0;background:radial-gradient(closest-side,var(--accent-soft),transparent);z-index:0}
+.phone{position:relative;z-index:1;width:300px;aspect-ratio:300/610;border-radius:46px;padding:10px;
+  background:#0B1310;box-shadow:var(--shadow),0 40px 80px -30px rgba(22,33,29,.45)}
+.screen{position:relative;height:100%;border-radius:37px;overflow:hidden;background:#1a2420}
+.cam{position:absolute;inset:0;background:
+  radial-gradient(120% 70% at 30% 20%,#3b4a43,#1a2420 60%),#1a2420}
+.viewfinder{position:absolute;top:17%;left:50%;width:58%;aspect-ratio:1;transform:translateX(-50%)}
+.viewfinder .qr{position:absolute;inset:9%;background:#F7F8F6;border-radius:12px;padding:7%;
+  transform:rotate(-4deg);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.viewfinder .qr svg{display:block;width:100%;height:100%}
+.corner{position:absolute;width:26%;height:26%;border:3.5px solid var(--paper);border-radius:6px}
+.corner.tl{top:0;left:0;border-right:0;border-bottom:0;border-top-left-radius:18px}
+.corner.tr{top:0;right:0;border-left:0;border-bottom:0;border-top-right-radius:18px}
+.corner.bl{bottom:0;left:0;border-right:0;border-top:0;border-bottom-left-radius:18px}
+.corner.br{bottom:0;right:0;border-left:0;border-top:0;border-bottom-right-radius:18px}
+.viewfinder{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:translateX(-50%) scale(.96)}}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:var(--surface);color:var(--text);
+  border-radius:24px 24px 0 0;padding:10px 18px 20px;animation:rise .9s cubic-bezier(.2,.8,.2,1) .4s both}
+@keyframes rise{from{transform:translateY(100%)}}
+.grab{width:36px;height:4px;border-radius:2px;background:var(--border);margin:0 auto 14px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;
+  color:var(--c-organize);background:color-mix(in srgb,var(--c-organize) 12%,transparent)}
+.chip svg{width:13px;height:13px}
+.sheet h3{margin:10px 0 2px;font-size:19px;line-height:1.25}
+.sheet .raw{font-size:12.5px;color:var(--text3);margin:0 0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.verdict{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:14px;margin-bottom:14px;
+  background:color-mix(in srgb,var(--success) 12%,transparent)}
+.verdict svg{width:20px;height:20px;color:var(--success);flex:none;margin-top:1px}
+.verdict b{display:block;font-size:13.5px}
+.verdict span{font-size:12px;color:var(--text2)}
+.sheet .open{display:block;text-align:center;background:var(--accent);color:var(--on-accent);font-weight:600;font-size:15px;
+  padding:11px;border-radius:12px}
+.sheet .row{display:flex;justify-content:space-around;margin-top:12px;color:var(--text2);font-size:11.5px}
+.sheet .row div{display:flex;flex-direction:column;align-items:center;gap:3px}
+.sheet .row svg{width:18px;height:18px}
+.float{position:absolute;z-index:2;background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:10px 14px;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600}
+.float .ic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center}
+.float .ic svg{width:18px;height:18px}
+.float small{display:block;font-weight:400;color:var(--text3);font-size:12px}
+.f1{top:14%;inset-inline-start:-6%;animation:bob 5s ease-in-out infinite}
+.f2{top:43%;inset-inline-end:-8%;animation:bob 5s ease-in-out 1.2s infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+
+/* Sections */
+section{padding:88px 0}
+.sec-head{max-width:640px;margin:0 auto 48px;text-align:center}
+.kicker{color:var(--accent);font-weight:600;font-size:14px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px}
+[dir=rtl] .kicker{letter-spacing:0}
+h2{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.02em;margin:0 0 14px}
+[dir=rtl] h2{letter-spacing:0;line-height:1.35}
+.sec-head p{color:var(--text2);font-size:18px;margin:0}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:26px;
+  transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.card .ic{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:18px;
+  color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent)}
+.card .ic svg{width:24px;height:24px}
+.card h3{font-size:18px;margin:0 0 6px}
+.card p{margin:0;color:var(--text2);font-size:15.5px}
+.card .pro{display:inline-block;margin-inline-start:6px;vertical-align:2px;font-size:11px;font-weight:700;
+  color:var(--text);background:var(--gold-soft);border:1px solid var(--gold);padding:1px 7px;border-radius:6px}
+
+/* How it works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.step{position:relative;padding:26px;border-radius:22px;background:var(--sunken)}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--border);font-weight:700;color:var(--accent);margin-bottom:16px}
+.step h3{margin:0 0 6px;font-size:18px}
+.step p{margin:0;color:var(--text2);font-size:15.5px}
+
+/* Privacy band */
+.band{background:var(--brand);color:var(--paper);border-radius:32px;padding:64px 48px;
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;overflow:hidden}
+.band::after{content:"";position:absolute;width:340px;height:340px;inset-inline-end:-90px;top:-110px;border-radius:90px;
+  background:var(--brand-deep);transform:rotate(12deg)}
+.band > *{position:relative;z-index:1}
+.band .kicker{color:rgba(247,248,246,.8)}
+.band h2{color:var(--paper)}
+.band p{color:rgba(247,248,246,.78);font-size:17.5px;margin:0}
+.band ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.band li{display:flex;gap:14px;align-items:flex-start;background:rgba(247,248,246,.08);border:1px solid rgba(247,248,246,.14);
+  border-radius:18px;padding:16px 18px}
+.band li svg{width:22px;height:22px;flex:none;color:#C4AA6C;margin-top:2px}
+.band li b{display:block;color:var(--paper)}
+.band li span{color:rgba(247,248,246,.72);font-size:14.5px}
+.band a{color:var(--paper)}
+
+/* Bilingual */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.duo .card{text-align:center;padding:34px 26px}
+.duo .big{font-size:clamp(26px,3.4vw,34px);font-weight:700;margin:0 0 6px}
+.duo .big[lang=ar]{font-family:"IBM Plex Sans Arabic",sans-serif}
+
+/* CTA + footer */
+.final{text-align:center}
+.final .ctas{justify-content:center}
+footer{border-top:1px solid var(--border);padding:36px 0 48px;color:var(--text3);font-size:14.5px}
+footer .container{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+footer a{color:var(--text2);text-decoration:none}
+footer a:hover{color:var(--text)}
+footer .spacer{margin-inline-start:auto}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero{padding:40px 0 64px}
+  .hero .container{grid-template-columns:1fr;gap:48px;text-align:center}
+  .lead{margin-inline:auto}
+  .ctas,.trust{justify-content:center}
+  .grid,.steps{grid-template-columns:1fr 1fr}
+  .band{grid-template-columns:1fr;padding:44px 26px}
+}
+@media (max-width:600px){
+  section{padding:64px 0}
+  .grid,.steps,.duo{grid-template-columns:1fr}
+  .phone{width:260px}
+  .f1{inset-inline-start:-2%}.f2{inset-inline-end:-2%}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- Phosphor-style line icons -->
+  <symbol id="i-check" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" d="M40 144l56 56L224 72"/></symbol>
+  <symbol id="i-scan" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M176 40h40v40M80 216H40v-40M216 176v40h-40M40 80V40h40"/><rect x="88" y="88" width="80" height="80" rx="8"/></g></symbol>
+  <symbol id="i-shield" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M216 112V56a8 8 0 0 0-8-8H48a8 8 0 0 0-8 8v56c0 96 88 120 88 120s88-24 88-120Z"/><path d="M88 136l24 24 56-56"/></g></symbol>
+  <symbol id="i-wifi" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M24 96a152 152 0 0 1 208 0M56 132a104 104 0 0 1 144 0M88 168a56 56 0 0 1 80 0"/><circle cx="128" cy="204" r="6" fill="currentColor"/></g></symbol>
+  <symbol id="i-barcode" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M184 48h40v40M72 208H32v-40M224 168v40h-40M32 88V48h40M80 88v80M176 88v80M144 88v80M112 88v80"/></g></symbol>
+  <symbol id="i-palette" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M224 128a96 96 0 1 0-96 96c18 0 24-14 18-26-8-16 2-30 18-30h28a32 32 0 0 0 32-40Z"/><circle cx="128" cy="76" r="10" fill="currentColor"/><circle cx="84" cy="100" r="10" fill="currentColor"/><circle cx="84" cy="152" r="10" fill="currentColor"/><circle cx="172" cy="100" r="10" fill="currentColor"/></g></symbol>
+  <symbol id="i-stack" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M32 176l96 56 96-56M32 128l96 56 96-56M32 80l96 56 96-56-96-56Z"/></g></symbol>
+  <symbol id="i-contact" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><rect x="32" y="48" width="192" height="160" rx="8"/><circle cx="96" cy="120" r="24"/><path d="M60 176c8-16 20-24 36-24s28 8 36 24M156 104h40M156 136h40"/></g></symbol>
+  <symbol id="i-lock" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><rect x="40" y="88" width="176" height="128" rx="8"/><path d="M92 88V56a36 36 0 0 1 72 0v32"/></g></symbol>
+  <symbol id="i-user-x" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><circle cx="108" cy="100" r="52"/><path d="M24 200c20-28 50-44 84-44s64 16 84 44M200 56l32 32M232 56l-32 32"/></g></symbol>
+  <symbol id="i-prohibit" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><circle cx="128" cy="128" r="96"/><path d="M60 60l136 136"/></g></symbol>
+  <symbol id="i-link" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="18"><path d="M108 148l40-40M140 164l-28 28a40 40 0 0 1-56-56l28-28M116 92l28-28a40 40 0 0 1 56 56l-28 28"/></g></symbol>
+  <symbol id="i-copy" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><rect x="40" y="88" width="128" height="128" rx="8"/><path d="M88 88V48h120v120h-40"/></g></symbol>
+  <symbol id="i-share" viewBox="0 0 256 256"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"><path d="M176 104h24v112H56V104h24M88 64l40-40 40 40M128 24v112"/></g></symbol>
+  <symbol id="i-star" viewBox="0 0 256 256"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="16" d="M128 32l29 61 66 8-49 46 13 66-59-33-59 33 13-66-49-46 66-8Z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M4.2 2.4c-.2.2-.3.6-.3 1v17.2c0 .4.1.8.3 1l9.6-9.6L4.2 2.4Zm10.6 10.6 2.6 2.6-10.7 6.1c-.4.2-.8.2-1.1.1l9.2-8.8Zm0-2-9.2-8.8c.3-.1.7-.1 1.1.1l10.7 6.1-2.6 2.6Zm3.6-2 2.9 1.7c.8.5.8 1.3 0 1.8l-2.9 1.7-2.8-2.6 2.8-2.6Z"/></symbol>
+  <symbol id="mark" viewBox="0 0 1024 1024"><defs><mask id="qm"><rect x="200" y="200" width="440" height="440" rx="122" fill="#fff"/><rect x="310" y="310" width="224" height="224" rx="64" fill="#000"/></mask></defs><rect width="1024" height="1024" rx="230" fill="#285B49"/><rect x="200" y="200" width="440" height="440" rx="122" fill="#F7F8F6" mask="url(#qm)"/><rect x="372" y="372" width="100" height="100" rx="30" fill="#C4AA6C"/><rect x="560" y="560" width="264" height="264" rx="78" fill="#F7F8F6"/></symbol>
+</svg>
+
+<nav id="nav">
+  <div class="container">
+    <a class="logo" href="#top"><svg aria-hidden="true"><use href="#mark"/></svg><span class="ltr">Lamm QR</span></a>
+    <div class="nav-links">
+      <a class="hide-sm" href="#features" data-i18n="nav_features">Features</a>
+      <a class="hide-sm" href="#privacy" data-i18n="nav_privacy">Privacy</a>
+      <button class="lang" id="lang" type="button" aria-label="Switch language">العربية</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="container">
+    <div>
+      <span class="eyebrow"><i></i><span data-i18n="eyebrow">No ads. No account. Free scanning.</span></span>
+      <h1 data-i18n-html="h1">Scan safely.<br><span class="soft">Create beautifully.</span></h1>
+      <p class="lead" data-i18n="lead">Lamm QR reads any QR code or barcode and shows you exactly what it contains — and what will happen — before anything opens.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.omk.lamm.qr">
+          <svg aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="cta_play">Get it on Google Play</span></a>
+        <span class="btn btn-ghost" data-i18n="cta_ios">iPhone — coming soon</span>
+      </div>
+      <ul class="trust">
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="t1">Scans stay on your phone</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="t2">Arabic &amp; English</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="t3">Nothing opens without you</span></li>
+      </ul>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="phone">
+        <div class="screen">
+          <div class="cam"></div>
+          <div class="viewfinder">
+            <div class="qr"><svg id="qr" viewBox="0 0 25 25" shape-rendering="geometricPrecision"></svg></div>
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          </div>
+          <div class="sheet">
+            <div class="grab"></div>
+            <span class="chip"><svg><use href="#i-link"/></svg><span data-i18n="m_chip">Link</span></span>
+            <h3 class="ltr">lamm-cafe.com</h3>
+            <p class="raw ltr">https://lamm-cafe.com/menu</p>
+            <div class="verdict"><svg><use href="#i-shield"/></svg>
+              <div><b data-i18n="m_v">No suspicious signs</b><span data-i18n="m_vs">Checked before opening</span></div></div>
+            <span class="open" data-i18n="m_open">Open link</span>
+            <div class="row">
+              <div><svg><use href="#i-copy"/></svg><span data-i18n="m_copy">Copy</span></div>
+              <div><svg><use href="#i-share"/></svg><span data-i18n="m_share">Share</span></div>
+              <div><svg><use href="#i-star"/></svg><span data-i18n="m_fav">Favorite</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="float f1"><span class="ic" style="color:var(--c-convert);background:color-mix(in srgb,var(--c-convert) 12%,transparent)"><svg><use href="#i-wifi"/></svg></span>
+        <div><span data-i18n="f1">Wi-Fi joined</span><small data-i18n="f1s">One tap, no typing</small></div></div>
+      <div class="float f2"><span class="ic" style="color:var(--c-optimize);background:color-mix(in srgb,var(--c-optimize) 12%,transparent)"><svg><use href="#i-barcode"/></svg></span>
+        <div><span data-i18n="f2">Product found</span><small data-i18n="f2s">From its barcode</small></div></div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="kicker" data-i18n="feat_k">Everything a code can hold</p>
+      <h2 data-i18n="feat_h">One calm app for every code</h2>
+      <p data-i18n="feat_p">Links, Wi-Fi, contacts, events, products — Lamm QR understands what you scanned and offers the right action.</p>
+    </div>
+    <div class="grid">
+      <div class="card reveal" style="--c:var(--c-organize)"><div class="ic"><svg><use href="#i-scan"/></svg></div>
+        <h3 data-i18n="c1h">Scan anything</h3><p data-i18n="c1p">QR codes and every common barcode, from the camera or from a photo you already have.</p></div>
+      <div class="card reveal" style="--c:var(--c-security)"><div class="ic"><svg><use href="#i-shield"/></svg></div>
+        <h3 data-i18n="c2h">Know before you open</h3><p data-i18n="c2p">Links are checked for warning signs, and short links show where they really go — before you tap.</p></div>
+      <div class="card reveal" style="--c:var(--c-convert)"><div class="ic"><svg><use href="#i-wifi"/></svg></div>
+        <h3 data-i18n="c3h">Wi-Fi in one tap</h3><p data-i18n="c3p">See the network name and join it directly. No squinting at passwords on a café wall.</p></div>
+      <div class="card reveal" style="--c:var(--c-edit)"><div class="ic"><svg><use href="#i-contact"/></svg></div>
+        <h3 data-i18n="c4h">Contacts &amp; events</h3><p data-i18n="c4p">Save a business card to contacts or an event to your calendar, exactly as it was shared.</p></div>
+      <div class="card reveal" style="--c:var(--c-convert)"><div class="ic"><svg><use href="#i-barcode"/></svg></div>
+        <h3 data-i18n="c5h">Products &amp; books</h3><p data-i18n="c5p">Scan a barcode to see what you are holding, from open product and book databases.</p></div>
+      <div class="card reveal" style="--c:var(--c-optimize)"><div class="ic"><svg><use href="#i-palette"/></svg></div>
+        <h3><span data-i18n="c6h">Design your own codes</span><span class="pro">PRO</span></h3><p data-i18n="c6p">Colours, shapes, frames and your logo — with a scannability check so it always works in print.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="kicker" data-i18n="how_k">How it works</p>
+      <h2 data-i18n="how_h">You stay in control</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><h3 data-i18n="s1h">Point and scan</h3><p data-i18n="s1p">The camera is ready the moment the app opens. Codes are read on your device.</p></div>
+      <div class="step reveal"><h3 data-i18n="s2h">See what it is</h3><p data-i18n="s2p">Lamm QR shows what the code contains and what will happen if you act on it.</p></div>
+      <div class="step reveal"><h3 data-i18n="s3h">Then you decide</h3><p data-i18n="s3p">Nothing opens, joins or saves until you tap. Suspicious links get a clear warning.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" style="padding-top:0">
+  <div class="container">
+    <div class="band reveal">
+      <div>
+        <p class="kicker" data-i18n="pv_k">Private by design</p>
+        <h2 data-i18n="pv_h">Your scans stay on your phone</h2>
+        <p data-i18n-html="pv_p">Your history, the codes you create and your notes live on your device. We never receive them. <a href="privacy.html">Read the privacy policy</a></p>
+      </div>
+      <ul>
+        <li><svg><use href="#i-user-x"/></svg><div><b data-i18n="pv1h">No account</b><span data-i18n="pv1p">Nothing to sign up for, nothing to leak.</span></div></li>
+        <li><svg><use href="#i-prohibit"/></svg><div><b data-i18n="pv2h">No ads, no tracking</b><span data-i18n="pv2p">No advertising SDK and no advertising ID.</span></div></li>
+        <li><svg><use href="#i-lock"/></svg><div><b data-i18n="pv3h">Locked history</b><span data-i18n="pv3p">Wi-Fi passwords are encrypted. Lock your history with Face ID or fingerprint.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="container">
+    <div class="sec-head reveal">
+      <p class="kicker" data-i18n="bi_k">Truly bilingual</p>
+      <h2 data-i18n="bi_h">Made for Arabic and English</h2>
+      <p data-i18n="bi_p">Full right-to-left layout in Arabic — while links, phone numbers and IBANs keep their own direction so they read correctly.</p>
+    </div>
+    <div class="duo">
+      <div class="card reveal"><p class="big" lang="en">Scan safely.</p><p style="margin:0;color:var(--text3)">English</p></div>
+      <div class="card reveal" dir="rtl"><p class="big" lang="ar">امسح بأمان.</p><p style="margin:0;color:var(--text3)">العربية</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="container reveal">
+    <h2 data-i18n="fin_h">Free scanning. No ads. Ever.</h2>
+    <p class="lead" style="margin-inline:auto" data-i18n="fin_p">Download Lamm QR and scan your first code in seconds.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.omk.lamm.qr">
+        <svg aria-hidden="true"><use href="#i-play"/></svg><span data-i18n="cta_play">Get it on Google Play</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <a class="logo" href="../" style="font-size:15px"><svg aria-hidden="true" style="width:24px;height:24px"><use href="#mark"/></svg><span data-i18n="family">A Lamm app by OMK Software</span></a>
+    <span class="spacer"></span>
+    <a href="privacy.html" data-i18n="ft_privacy">Privacy Policy</a>
+    <a href="terms.html" data-i18n="ft_terms">Terms of Use</a>
+    <a href="mailto:omksapps@gmail.com" class="ltr">omksapps@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+// Decorative QR: finder patterns plus seeded random modules.
+(function(){
+  var n=25,s=7,out='',seed=42;
+  function rnd(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff}
+  function finder(x,y){return '<rect x="'+x+'" y="'+y+'" width="7" height="7" rx="2" fill="#16211D"/>'+
+    '<rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" rx="1.4" fill="#F7F8F6"/>'+
+    '<rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" rx="1" fill="#285B49"/>'}
+  function inFinder(x,y){return (x<8&&y<8)||(x>n-9&&y<8)||(x<8&&y>n-9)}
+  for(var y=0;y<n;y++)for(var x=0;x<n;x++){
+    if(inFinder(x,y))continue;
+    if(rnd()<.48)out+='<rect x="'+(x+.08)+'" y="'+(y+.08)+'" width=".84" height=".84" rx=".3" fill="#16211D"/>';
+  }
+  out+=finder(0,0)+finder(n-s,0)+finder(0,n-s);
+  document.getElementById('qr').innerHTML=out;
+})();
+
+// Language: English is the page's own text; Arabic swaps it in.
+(function(){
+  var ar={
+    nav_features:'المزايا',nav_privacy:'الخصوصية',
+    eyebrow:'بلا إعلانات. بلا حساب. المسح مجاني.',
+    h1:'امسح بأمان.<br><span class="soft">وصمّم رموزًا جميلة.</span>',
+    lead:'يقرأ Lamm QR أي رمز QR أو باركود ويُريك بالضبط ما يحتويه — وما سيحدث — قبل أن يُفتح أي شيء.',
+    cta_play:'حمّله من Google Play',cta_ios:'آيفون — قريبًا',
+    t1:'عمليات المسح تبقى على هاتفك',t2:'عربي وإنجليزي',t3:'لا شيء يُفتح من دونك',
+    m_chip:'رابط',m_v:'لا علامات مريبة',m_vs:'فُحص قبل الفتح',m_open:'افتح الرابط',m_copy:'نسخ',m_share:'مشاركة',m_fav:'المفضلة',
+    f1:'تم الاتصال بالشبكة',f1s:'بلمسة واحدة، بلا كتابة',f2:'تم العثور على المنتج',f2s:'من الباركود',
+    feat_k:'كل ما يمكن أن يحمله الرمز',feat_h:'تطبيق هادئ لكل الرموز',
+    feat_p:'روابط، شبكات Wi-Fi، جهات اتصال، مواعيد، منتجات — يفهم Lamm QR ما مسحته ويقترح الإجراء المناسب.',
+    c1h:'امسح أي شيء',c1p:'رموز QR وكل أنواع الباركود الشائعة، من الكاميرا أو من صورة لديك.',
+    c2h:'اعرف قبل أن تفتح',c2p:'تُفحص الروابط بحثًا عن علامات التحذير، وتُظهر الروابط المختصرة وجهتها الحقيقية — قبل أن تلمسها.',
+    c3h:'Wi-Fi بلمسة واحدة',c3p:'اعرف اسم الشبكة واتصل بها مباشرة، بلا تدقيق في كلمة مرور على جدار المقهى.',
+    c4h:'جهات الاتصال والمواعيد',c4p:'احفظ بطاقة عمل في جهات الاتصال أو موعدًا في التقويم، كما شُورك تمامًا.',
+    c5h:'المنتجات والكتب',c5p:'امسح الباركود لتعرف ما بين يديك، من قواعد بيانات مفتوحة للمنتجات والكتب.',
+    c6h:'صمّم رموزك',c6p:'ألوان وأشكال وإطارات وشعارك — مع فحص قابلية المسح ليعمل الرمز دائمًا عند الطباعة.',
+    how_k:'كيف يعمل',how_h:'القرار دائمًا لك',
+    s1h:'وجّه وامسح',s1p:'الكاميرا جاهزة لحظة فتح التطبيق، وتُقرأ الرموز على جهازك.',
+    s2h:'اعرف ما هو',s2p:'يعرض Lamm QR ما يحتويه الرمز وما سيحدث إن تصرّفت بناءً عليه.',
+    s3h:'ثم قرّر أنت',s3p:'لا شيء يُفتح أو يتصل أو يُحفظ حتى تلمس بنفسك. والروابط المريبة تحصل على تحذير واضح.',
+    pv_k:'الخصوصية في الأساس',pv_h:'عمليات المسح تبقى على هاتفك',
+    pv_p:'سجلّك والرموز التي تنشئها وملاحظاتك تبقى على جهازك، ولا نستلمها أبدًا. <a href="privacy.html">اقرأ سياسة الخصوصية</a>',
+    pv1h:'بلا حساب',pv1p:'لا شيء للتسجيل فيه، ولا شيء ليتسرّب.',
+    pv2h:'بلا إعلانات ولا تتبّع',pv2p:'لا حزمة إعلانات ولا معرّف إعلان.',
+    pv3h:'سجل مقفل',pv3p:'كلمات مرور Wi-Fi مشفّرة، ويمكنك قفل السجل ببصمة الوجه أو الإصبع.',
+    bi_k:'ثنائي اللغة حقًا',bi_h:'صُنع للعربية والإنجليزية',
+    bi_p:'واجهة كاملة من اليمين إلى اليسار بالعربية — بينما تحتفظ الروابط وأرقام الهواتف والآيبان باتجاهها لتُقرأ صحيحة.',
+    fin_h:'مسح مجاني. بلا إعلانات. دائمًا.',fin_p:'حمّل Lamm QR وامسح أول رمز خلال ثوانٍ.',
+    family:'أحد تطبيقات Lamm من OMK Software',ft_privacy:'سياسة الخصوصية',ft_terms:'شروط الاستخدام'
+  };
+  var nodes=[].slice.call(document.querySelectorAll('[data-i18n],[data-i18n-html]'));
+  nodes.forEach(function(el){el._en=el.innerHTML});
+  var btn=document.getElementById('lang');
+  function apply(lang){
+    var isAr=lang==='ar';
+    document.documentElement.lang=lang;document.documentElement.dir=isAr?'rtl':'ltr';
+    nodes.forEach(function(el){
+      var k=el.getAttribute('data-i18n')||el.getAttribute('data-i18n-html');
+      if(isAr&&ar[k]!=null){if(el.hasAttribute('data-i18n-html'))el.innerHTML=ar[k];else el.textContent=ar[k]}
+      else el.innerHTML=el._en;
+    });
+    btn.textContent=isAr?'English':'العربية';
+    document.title=isAr?'Lamm QR — امسح بأمان، وصمّم رموزًا جميلة':'Lamm QR — Scan safely. Create beautifully.';
+    try{localStorage.setItem('lammqr-lang',lang)}catch(e){}
+  }
+  var saved=null;try{saved=localStorage.getItem('lammqr-lang')}catch(e){}
+  var initial=new URLSearchParams(location.search).get('lang')||saved||((navigator.language||'').slice(0,2)==='ar'?'ar':'en');
+  if(initial==='ar')apply('ar');
+  btn.addEventListener('click',function(){apply(document.documentElement.lang==='ar'?'en':'ar')});
+})();
+
+// Nav border on scroll, reveal on view.
+(function(){
+  var nav=document.getElementById('nav');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>8)},{passive:true});
+  if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});return}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
